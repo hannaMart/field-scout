@@ -68,6 +68,8 @@ request.onsuccess = () => {
 
 const getLocation = () => {
   loading.value = true;
+  // alert(location.origin);
+  // alert(window.isSecureContext);
   if (!navigator.geolocation) {
     alert("Geolokalizacja nie jest wspierana!");
     return;
@@ -79,8 +81,13 @@ const getLocation = () => {
       loading.value = false;
     },
     (err) => {
-      alert("Błąd GPS: " + err.message);
+      alert("Kod: " + err.code + "\nMessage: " + err.message);
       loading.value = false;
+    },
+    {
+      enableHighAccuracy: true,
+      timeout: 10000,
+      maximumAge: 0,
     },
   );
 };
